@@ -1,0 +1,1 @@
+2025/11/09 23:43:51 [error] 22#22: *3 open() "/usr/share/nginx/html/starlink/favicon.ico" failed (2: No such file or directory), client: 172.19.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"

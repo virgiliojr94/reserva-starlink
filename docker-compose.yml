@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  starlink-reserva:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: starlink-reserva
+    ports:
+      - "8080:80"
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+    volumes:
+      # Volume para logs do Nginx (opcional)
+      - ./logs:/var/log/nginx
+      # Volume para facilitar desenvolvimento (descomente para development)
+      # - ./reserva-com-planos.html:/usr/share/nginx/html/reserva/index.html:ro
+      # - ./config-reserva.js:/usr/share/nginx/html/reserva/config-reserva.js:ro
+    restart: unless-stopped
+    networks:
+      - reserva-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.reserva.rule=Host(`reserva.localhost`)"
+      - "traefik.http.services.reserva.loadbalancer.server.port=80"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:80",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  reserva-network:
+    driver: bridge
+
+volumes:
+  nginx-logs:
+    driver: local
