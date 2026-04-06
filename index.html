@@ -156,6 +156,7 @@
             content: '';
             position: absolute;
             inset: 0;
+            pointer-events: none;
             background:
                 radial-gradient(ellipse at 20% 50%, rgba(212, 160, 23, 0.15) 0%, transparent 50%),
                 radial-gradient(ellipse at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
@@ -165,6 +166,7 @@
             position: absolute;
             inset: 0;
             overflow: hidden;
+            pointer-events: none;
         }
 
         .hero-stars span {
@@ -191,6 +193,7 @@
 
         .hero-container {
             position: relative;
+            z-index: 2;
             max-width: 1200px;
             margin: 0 auto;
             padding: 120px 24px 80px;
