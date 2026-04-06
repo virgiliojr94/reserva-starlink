@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starlink Locação | Internet via Satélite para Empresas</title>
+    <meta name="description"
+        content="Alugue equipamento Starlink com plano de dados ilimitado, gestão remota e suporte técnico. Internet via satélite com até 300Mbps.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --primary-light: #1e293b;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --accent-light: #dbeafe;
+            --green: #10b981;
+            --green-light: #d1fae5;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --text-lighter: #94a3b8;
+            --white: #ffffff;
+            --bg: #f8fafc;
+            --bg-dark: #0f172a;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-logo svg {
+            width: 36px;
+            height: 36px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-cta {
+            background: var(--accent) !important;
+            color: var(--white) !important;
+            font-weight: 600 !important;
+            padding: 10px 20px !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-hover) !important;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .mobile-toggle svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-stars {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .hero-stars span {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--dur) ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: var(--opacity);
+            }
+        }
+
+        .hero-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 24px 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #93c5fd;
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.5);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.7;
+            margin-bottom: 36px;
+            max-width: 520px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-whatsapp:hover {
+            background: #20bd5a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--white);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-illustration {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .satellite-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .satellite-icon {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(16, 185, 129, 0.2));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .satellite-icon svg {
+            width: 80px;
+            height: 80px;
+        }
+
+        .satellite-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #60a5fa;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ========== SEÇÃO COMO FUNCIONA ========== */
+        .section {
+            padding: 100px 24px;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .how-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .how-card {
+            text-align: center;
+            padding: 40px 24px;
+            border-radius: 20px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .how-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--accent);
+        }
+
+        .how-card-number {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        .how-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--accent-light), #ede9fe);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .how-icon svg {
+            width: 36px;
+            height: 36px;
+            color: var(--accent);
+        }
+
+        .how-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .how-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ========== DESTAQUES / VANTAGENS ========== */
+        .advantages {
+            background: var(--bg);
+        }
+
+        .adv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .adv-content h2 {
+            font-size: clamp(1.8rem, 3vw, 2.3rem);
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+        }
+
+        .adv-content p {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .adv-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .adv-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        .adv-check {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            background: var(--green-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .adv-check svg {
+            width: 16px;
+            height: 16px;
+            color: var(--green);
+        }
+
+        .adv-visual {
+            display: flex;
+            justify-content: center;
+        }
+
+        .adv-card-stack {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            max-width: 460px;
+        }
+
+        .adv-mini-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .adv-mini-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .adv-mini-card .mini-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .adv-mini-card .mini-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        /* ========== PLANOS ========== */
+        .plans {
+            background: linear-gradient(180deg, var(--white) 0%, var(--bg) 100%);
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .plan-card {
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 24px;
+            padding: 36px 28px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .plan-card.selected-plan {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent), var(--shadow-xl);
+        }
+
+        .plan-card.featured {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 1px var(--accent), var(--shadow-lg);
+        }
+
+        .plan-badge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--accent);
+            color: var(--white);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 6px;
+        }
+
+        .plan-type-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 16px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .plan-type-icon.unlimited {
+            background: linear-gradient(135deg, #dbeafe, #d1fae5);
+        }
+
+        .plan-type-icon.limited {
+            background: linear-gradient(135deg, #fef3c7, #fce7f3);
+        }
+
+        .plan-type-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .plan-name {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 4px;
+            margin-top: 8px;
+        }
+
+        .plan-card.featured .plan-name {
+            margin-top: 24px;
+        }
+
+        .plan-subtitle {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.5;
+            min-height: 36px;
+        }
+
+        .plan-price {
+            margin-bottom: 20px;
+            padding: 16px;
+            background: var(--bg);
+            border-radius: 16px;
+        }
+
+        .plan-currency {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            vertical-align: top;
+        }
+
+        .plan-amount {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+
+        .plan-period {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .plan-data-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 8px;
+        }
+
+        .plan-data-badge.unlimited-badge {
+            background: var(--green-light);
+            color: #059669;
+        }
+
+        .plan-data-badge.limited-badge {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .plan-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .plan-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+
+        .plan-features li svg {
+            flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+            color: var(--green);
+        }
+
+        .plan-features li.warning svg {
+            color: #f59e0b;
+        }
+
+        .plan-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .plan-btn:hover {
+            background: var(--accent);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .plan-card.featured .plan-btn,
+        .plan-card.selected-plan .plan-btn {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .plan-card.featured .plan-btn:hover,
+        .plan-card.selected-plan .plan-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        .plan-note {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.8rem;
+            color: var(--text-lighter);
+        }
+
+        /* ========== SIMULADOR ========== */
+        .simulator {
+            max-width: 700px;
+            margin: 48px auto 0;
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 24px;
+            padding: 40px 36px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .simulator-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .simulator-desc {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 28px;
+        }
+
+        .sim-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .sim-field label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .sim-field select,
+        .sim-field input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: var(--text);
+            background: var(--bg);
+            transition: border-color 0.2s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .sim-field select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 40px;
+        }
+
+        .sim-field select:focus,
+        .sim-field input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .sim-discount-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .discount-tier {
+            flex: 1;
+            text-align: center;
+            padding: 10px 8px;
+            border-radius: 12px;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            transition: all 0.3s;
+            font-size: 0.78rem;
+        }
+
+        .discount-tier.active {
+            border-color: var(--green);
+            background: var(--green-light);
+        }
+
+        .discount-tier .tier-days {
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .discount-tier .tier-pct {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .discount-tier.active .tier-pct {
+            color: #059669;
+        }
+
+        .sim-result {
+            background: linear-gradient(135deg, #0f172a, #1e3a5f);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .sim-result-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 4px;
+        }
+
+        .sim-result-total {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .sim-result-detail {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 4px;
+        }
+
+        .sim-result-savings {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 16px;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 100px;
+            color: #34d399;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .sim-result-savings.hidden {
+            display: none;
+        }
+
+        .sim-cta {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+            background: #25d366;
+            color: var(--white);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .sim-cta:hover {
+            background: #20bd5a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        @media (max-width: 600px) {
+            .sim-row {
+                grid-template-columns: 1fr;
+            }
+
+            .sim-discount-bar {
+                flex-wrap: wrap;
+            }
+
+            .discount-tier {
+                flex: 1 1 45%;
+            }
+
+            .simulator {
+                padding: 28px 20px;
+            }
+        }
+        }
+
+        /* ========== CTA / CONTATO ========== */
+        .cta-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.15), transparent 70%);
+        }
+
+        .cta-container {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .cta-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* ========== FAQ ========== */
+        .faq {
+            background: var(--bg);
+        }
+
+        .faq-list {
+            max-width: 720px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--accent);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-align: left;
+            font-family: inherit;
+        }
+
+        .faq-question svg {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            color: var(--text-lighter);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question svg {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .faq-answer-inner {
+            padding: 0 24px 20px;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: var(--bg-dark);
+            padding: 60px 24px 30px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand h3 {
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-col a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--white);
+        }
+
+        .footer-divider {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 24px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+
+        /* ========== WHATSAPP FLOAT ========== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+            transition: all 0.3s;
+            text-decoration: none;
+            animation: bounce-in 0.6s ease 1s both;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        @keyframes bounce-in {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* ========== RESPONSIVO ========== */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-desc {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .satellite-card {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .how-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .adv-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .adv-list li {
+                justify-content: center;
+            }
+
+            .adv-visual {
+                order: -1;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--bg-dark);
+                padding: 16px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .hero-container {
+                padding: 100px 24px 60px;
+            }
+
+            .plans-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .how-grid {
+                grid-template-columns: 1fr;
+                max-width: 360px;
+                margin: 0 auto;
+            }
+
+            .section {
+                padding: 60px 24px;
+            }
+
+            .adv-card-stack {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                justify-content: center;
+            }
+
+            .cta-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="18" cy="18" r="16" stroke="#3b82f6" stroke-width="2" />
+                    <path d="M18 6 L18 30 M10 12 Q18 8 26 12 M8 18 Q18 14 28 18 M10 24 Q18 20 26 24" stroke="#3b82f6"
+                        stroke-width="1.5" fill="none" />
+                    <circle cx="18" cy="8" r="2.5" fill="#3b82f6" />
+                </svg>
+                STARLINK LOCAÇÃO
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#como-funciona">Como Funciona</a></li>
+                <li><a href="#vantagens">Vantagens</a></li>
+                <li><a href="#planos">Planos</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contato" class="nav-cta">Fale Conosco</a></li>
+            </ul>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="hero">
+        <div class="hero-stars" id="heroStars"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">Internet via Satélite</div>
+                <h1>
+                    Internet <span>Starlink</span><br>
+                    onde você precisar
+                </h1>
+                <p class="hero-desc">
+                    Alugue o equipamento Starlink com plano de dados ilimitado, gestão remota
+                    e suporte técnico especializado. Tudo em uma única mensalidade.
+                </p>
+                <div class="hero-actions">
+                    <a href="#planos" class="btn btn-primary">
+                        Ver Planos
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                    <a href="https://wa.me/5569999999999?text=Ol%C3%A1!%20Tenho%20interesse%20na%20loca%C3%A7%C3%A3o%20de%20Starlink."
+                        class="btn btn-whatsapp" target="_blank" rel="noopener">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                        </svg>
+                        WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-illustration">
+                    <div class="satellite-card">
+                        <div class="satellite-icon">
+                            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="40" cy="25" r="8" stroke="#60a5fa" stroke-width="2.5" />
+                                <path d="M20 55 L40 35 L60 55" stroke="#60a5fa" stroke-width="2.5" fill="none"
+                                    stroke-linecap="round" />
+                                <path d="M15 55 H65" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round" />
+                                <path d="M40 25 L40 10" stroke="#34d399" stroke-width="2" stroke-linecap="round" />
+                                <path d="M30 15 Q40 5 50 15" stroke="#34d399" stroke-width="1.5" fill="none"
+                                    stroke-linecap="round" />
+                                <path d="M25 20 Q40 8 55 20" stroke="#34d399" stroke-width="1.5" fill="none"
+                                    stroke-linecap="round" opacity="0.5" />
+                                <circle cx="40" cy="25" r="3" fill="#60a5fa" />
+                            </svg>
+                        </div>
+                        <div class="satellite-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">300</div>
+                                <div class="stat-label">Mbps Download</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">30</div>
+                                <div class="stat-label">Mbps Upload</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">∞</div>
+                                <div class="stat-label">Dados Ilimitados</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">24/7</div>
+                                <div class="stat-label">Suporte</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== COMO FUNCIONA ========== -->
+    <section class="section" id="como-funciona">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">Simples e rápido</span>
+                <h2 class="section-title">Como funciona a locação?</h2>
+                <p class="section-subtitle">Equipamento + plano de dados + suporte técnico, tudo incluído na diária.
+                    Descontos automáticos por período.</p>
+            </div>
+            <div class="how-grid">
+                <div class="how-card">
+                    <div class="how-card-number">1</div>
+                    <div class="how-icon">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3>Escolha seu Plano</h3>
+                    <p>Selecione o plano ideal para sua necessidade e período de contrato.</p>
+                </div>
+                <div class="how-card">
+                    <div class="how-card-number">2</div>
+                    <div class="how-icon">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                            <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                        </svg>
+                    </div>
+                    <h3>Receba o Equipamento</h3>
+                    <p>A antena Starlink é enviada pronta para uso diretamente no local da instalação.</p>
+                </div>
+                <div class="how-card">
+                    <div class="how-card-number">3</div>
+                    <div class="how-icon">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                            <path
+                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                    <h3>Configuração Remota</h3>
+                    <p>Nossa equipe configura e ativa seu Starlink remotamente com acompanhamento.</p>
+                </div>
+                <div class="how-card">
+                    <div class="how-card-number">4</div>
+                    <div class="how-icon">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                            <path
+                                d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                    <h3>Suporte Contínuo</h3>
+                    <p>Monitoramento 24/7 e suporte técnico dedicado para sua conexão.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== VANTAGENS ========== -->
+    <section class="section advantages" id="vantagens">
+        <div class="section-container">
+            <div class="adv-grid">
+                <div class="adv-content">
+                    <span class="section-tag">Por que alugar?</span>
+                    <h2>Locação flexível com descontos por período</h2>
+                    <p>Alugue por 1 dia ou por meses — quanto mais diárias, maior o desconto. Ideal para empresas,
+                        fazendas, obras, eventos e expedições.</p>
+                    <ul class="adv-list">
+                        <li>
+                            <span class="adv-check"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    stroke-width="3">
+                                    <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                                </svg></span>
+                            Sem custo de aquisição — só a diária
+                        </li>
+                        <li>
+                            <span class="adv-check"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    stroke-width="3">
+                                    <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                                </svg></span>
+                            10% OFF semanal · 20% quinzenal · 30% mensal
+                        </li>
+                        <li>
+                            <span class="adv-check"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    stroke-width="3">
+                                    <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                                </svg></span>
+                            Planos fixos ou móveis (carro, barco, obra)
+                        </li>
+                        <li>
+                            <span class="adv-check"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    stroke-width="3">
+                                    <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                                </svg></span>
+                            Cobertura em todo o território nacional
+                        </li>
+                        <li>
+                            <span class="adv-check"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                    stroke-width="3">
+                                    <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                                </svg></span>
+                            Manutenção, suporte e configuração incluídos
+                        </li>
+                    </ul>
+                </div>
+                <div class="adv-visual">
+                    <div class="adv-card-stack">
+                        <div class="adv-mini-card">
+                            <div class="mini-value">300<small style="font-size:0.5em">Mbps</small></div>
+                            <div class="mini-label">Download</div>
+                        </div>
+                        <div class="adv-mini-card">
+                            <div class="mini-value">30<small style="font-size:0.5em">Mbps</small></div>
+                            <div class="mini-label">Upload</div>
+                        </div>
+                        <div class="adv-mini-card">
+                            <div class="mini-value">20<small style="font-size:0.5em">ms</small></div>
+                            <div class="mini-label">Latência</div>
+                        </div>
+                        <div class="adv-mini-card">
+                            <div class="mini-value">99.9<small style="font-size:0.5em">%</small></div>
+                            <div class="mini-label">Disponibilidade</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PLANOS ========== -->
+    <section class="section plans" id="planos">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">Planos e Valores</span>
+                <h2 class="section-title">Escolha o plano ideal para sua necessidade</h2>
+                <p class="section-subtitle">Locação por diária com descontos progressivos. Quanto mais dias, maior o
+                    desconto.</p>
+            </div>
+            <div class="plans-grid">
+                <!-- PLANO FIXO ILIMITADO -->
+                <div class="plan-card featured" data-plan="fixo-ilimitado" data-price="70" onclick="selectPlan(this)">
+                    <div class="plan-badge">Mais Popular</div>
+                    <div class="plan-type-icon unlimited">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="#3b82f6" stroke-width="2">
+                            <path
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z" />
+                        </svg>
+                    </div>
+                    <h3 class="plan-name">Fixo Ilimitado</h3>
+                    <p class="plan-subtitle">Ideal para uso residencial. Endereço fixo, sem mudanças constantes.</p>
+                    <div class="plan-price">
+                        <span class="plan-currency">R$ </span>
+                        <span class="plan-amount">70</span>
+                        <span class="plan-period">/dia</span>
+                        <span class="plan-data-badge unlimited-badge">Dados Ilimitados</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                            </svg> Banda ilimitada</li>
+                        <li><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                            </svg> Equipamento incluso</li>
+                        <li><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                            </svg> Suporte técnico</li>
+                        <li><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                            </svg> Configuração remota</li>
+                        <li class="warning"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round"
+                                    d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-2.99L13.73 4.01c-.77-1.33-2.69-1.33-3.46 0L3.34 16.01C2.57 17.33 3.53 19 5.07 19z" />
+                            </svg> Endereço fixo (sem mobilidade)</li>
+                    </ul>
+                    <button class="plan-btn"
+                        onclick="event.stopPropagation(); selectPlan(this.closest('.plan-card'))">Selecionar
+                        Plano</button>
+                </div>
+
+                <!-- PLANO MÓVEL ILIMITADO -->
+                <div class="plan-card" data-plan="movel-ilimitado" data-price="85" onclick="selectPlan(this)">
+                    <div class="plan-type-icon unlimited">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="#3b82f6" stroke-width="2">
+                            <path
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="plan-name">Móvel Ilimitado</h3>
+                    <p class="plan-subtitle">Use em qualquer lugar: carro, embarcação, obra, evento. Total liberdade.
+                    </p>
+                    <div class="plan-price">
+                        <span class="plan-currency">R$ </span>
+                        <span class="plan-amount">85</span>
+                        <span class="plan-period">/dia</span>
+                        <span class="plan-data-badge unlimited-badge">Dados Ilimitados</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                            </svg> Banda ilimitada</li>
+                        <li><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                            </svg> Mobilidade total</li>
+                        <li><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                            </svg> Equipamento incluso</li>
+                        <li><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                            </svg> Suporte técnico</li>
+                        <li><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                            </svg> Ideal para veículos e embarcações</li>
+                    </ul>
+                    <button class="plan-btn"
+                        onclick="event.stopPropagation(); selectPlan(this.closest('.plan-card'))">Selecionar
+                        Plano</button>
+                </div>
+
+                <!-- PLANO FIXO LIMITADO -->
+                <div class="plan-card" data-plan="fixo-limitado" data-price="50" onclick="selectPlan(this)">
+                    <div class="plan-type-icon limited">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="#b45309" stroke-width="2">
+                            <path
+                                d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="plan-name">Fixo Limitado</h3>
+                    <p class="plan-subtitle">Ideal para eventos, máquinas de cartão e computadores com baixo consumo.
+                    </p>
+                    <div class="plan-price">
+                        <span class="plan-currency">R$ </span>
+                        <span class="plan-amount">50</span>
+                        <span class="plan-period">/dia</span>
+                        <span class="plan-data-badge limited-badge">100 GB / dia</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                            </svg> 100 GB de franquia</li>
+                        <li><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                            </svg> Equipamento incluso</li>
+                        <li><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                            </svg> Suporte técnico</li>
+                        <li class="warning"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round"
+                                    d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-2.99L13.73 4.01c-.77-1.33-2.69-1.33-3.46 0L3.34 16.01C2.57 17.33 3.53 19 5.07 19z" />
+                            </svg> R$ 10/GB excedente</li>
+                        <li class="warning"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round"
+                                    d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-2.99L13.73 4.01c-.77-1.33-2.69-1.33-3.46 0L3.34 16.01C2.57 17.33 3.53 19 5.07 19z" />
+                            </svg> Endereço fixo (sem mobilidade)</li>
+                    </ul>
+                    <button class="plan-btn"
+                        onclick="event.stopPropagation(); selectPlan(this.closest('.plan-card'))">Selecionar
+                        Plano</button>
+                </div>
+
+                <!-- PLANO MÓVEL LIMITADO -->
+                <div class="plan-card" data-plan="movel-limitado" data-price="60" onclick="selectPlan(this)">
+                    <div class="plan-type-icon limited">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="#b45309" stroke-width="2">
+                            <path
+                                d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.142 0M1.394 9.393c5.857-5.858 15.355-5.858 21.213 0" />
+                        </svg>
+                    </div>
+                    <h3 class="plan-name">Móvel Limitado</h3>
+                    <p class="plan-subtitle">Para comunicação e pesquisas de campo em locais remotos, sem alto consumo.
+                    </p>
+                    <div class="plan-price">
+                        <span class="plan-currency">R$ </span>
+                        <span class="plan-amount">60</span>
+                        <span class="plan-period">/dia</span>
+                        <span class="plan-data-badge limited-badge">100 GB / dia</span>
+                    </div>
+                    <ul class="plan-features">
+                        <li><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                            </svg> 100 GB de franquia</li>
+                        <li><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                            </svg> Mobilidade total</li>
+                        <li><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                            </svg> Equipamento incluso</li>
+                        <li><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" d="M5 13l4 4L19 7" />
+                            </svg> Suporte técnico</li>
+                        <li class="warning"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round"
+                                    d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-2.99L13.73 4.01c-.77-1.33-2.69-1.33-3.46 0L3.34 16.01C2.57 17.33 3.53 19 5.07 19z" />
+                            </svg> R$ 10/GB excedente</li>
+                    </ul>
+                    <button class="plan-btn"
+                        onclick="event.stopPropagation(); selectPlan(this.closest('.plan-card'))">Selecionar
+                        Plano</button>
+                </div>
+            </div>
+
+            <!-- SIMULADOR DE DIÁRIAS -->
+            <div class="simulator" id="simulador">
+                <h3 class="simulator-title">📊 Simulador de Diárias</h3>
+                <p class="simulator-desc">Selecione um plano acima e informe a quantidade de diárias para calcular o
+                    valor com desconto automático.</p>
+
+                <div class="sim-row">
+                    <div class="sim-field">
+                        <label>Plano Selecionado</label>
+                        <select id="simPlan" onchange="calcSimulator()">
+                            <option value="">Selecione um plano</option>
+                            <option value="70">Fixo Ilimitado — R$ 70/dia</option>
+                            <option value="85">Móvel Ilimitado — R$ 85/dia</option>
+                            <option value="50">Fixo Limitado — R$ 50/dia</option>
+                            <option value="60">Móvel Limitado — R$ 60/dia</option>
+                        </select>
+                    </div>
+                    <div class="sim-field">
+                        <label>Quantidade de Diárias</label>
+                        <input type="number" id="simDays" min="1" max="365" value="1" oninput="calcSimulator()">
+                    </div>
+                </div>
+
+                <div class="sim-discount-bar">
+                    <div class="discount-tier" id="tier-none">
+                        <span class="tier-days">1-6 dias</span>
+                        <span class="tier-pct">Sem desconto</span>
+                    </div>
+                    <div class="discount-tier" id="tier-weekly">
+                        <span class="tier-days">7-13 dias</span>
+                        <span class="tier-pct">10% OFF</span>
+                    </div>
+                    <div class="discount-tier" id="tier-biweekly">
+                        <span class="tier-days">14-29 dias</span>
+                        <span class="tier-pct">20% OFF</span>
+                    </div>
+                    <div class="discount-tier" id="tier-monthly">
+                        <span class="tier-days">30+ dias</span>
+                        <span class="tier-pct">30% OFF</span>
+                    </div>
+                </div>
+
+                <div class="sim-result">
+                    <div class="sim-result-label">Valor Total Estimado</div>
+                    <div class="sim-result-total" id="simTotal">R$ 0,00</div>
+                    <div class="sim-result-detail" id="simDetail">Selecione um plano e informe as diárias</div>
+                    <span class="sim-result-savings hidden" id="simSavings">Economia de R$ 0,00</span>
+                </div>
+
+                <a href="#" id="simCta" class="sim-cta" target="_blank" rel="noopener" onclick="sendWhatsApp(event)">
+                    <svg style="display:inline-block;vertical-align:middle;margin-right:8px" width="20" height="20"
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                    </svg>
+                    Contratar via WhatsApp
+                </a>
+            </div>
+
+            <p class="plan-note">*Sujeito a disponibilidade de ativação. Planos limitados cobram R$ 10/GB acima da
+                franquia de 100GB.</p>
+        </div>
+    </section>
+
+    <!-- ========== FAQ ========== -->
+    <section class="section faq" id="faq">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">Dúvidas Frequentes</span>
+                <h2 class="section-title">Perguntas Frequentes</h2>
+                <p class="section-subtitle">Tire suas dúvidas sobre a locação de Starlink.</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        O que está incluso na diária?
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">A diária inclui o equipamento Starlink (antena + roteador), plano
+                            de dados conforme o plano escolhido (ilimitado ou 100GB), configuração remota e suporte
+                            técnico. Tudo numa única diária sem custos ocultos.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Como funcionam os descontos por período?
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Os descontos são automáticos e progressivos: <strong>10%
+                                OFF</strong> a partir de 7 diárias (semanal), <strong>20% OFF</strong> a partir de 14
+                            diárias (quinzenal) e <strong>30% OFF</strong> a partir de 30 diárias (mensal). O desconto é
+                            aplicado sobre o valor total.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Qual a diferença entre plano fixo e móvel?
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">O plano <strong>fixo</strong> é ideal para uso em um endereço fixo
+                            (residência, escritório, fazenda). O plano <strong>móvel</strong> permite usar em qualquer
+                            lugar — veículos, embarcações, obras itinerantes e eventos. A mobilidade é habilitada no
+                            equipamento pela Starlink.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        O que acontece se eu ultrapassar os 100GB nos planos limitados?
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Nos planos limitados (Fixo Limitado e Móvel Limitado), o consumo
+                            acima da franquia de 100GB será cobrado a <strong>R$ 10 por GB excedente</strong>. A
+                            internet não é cortada — você continua navegando e o excedente é incluído na fatura.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Funciona em qualquer lugar do Brasil?
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Sim! A Starlink utiliza satélites em órbita baixa que cobrem
+                            praticamente todo o território brasileiro, incluindo áreas rurais, remotas e de difícil
+                            acesso. Ideal para fazendas, obras, mineração e eventos em locais isolados.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Como é feita a instalação?
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">A instalação é simples e rápida. O equipamento é enviado ao local
+                            e a configuração é feita remotamente pela nossa equipe. Basta posicionar a antena com visão
+                            aberta do céu, conectar à energia e pronto! Acompanhamos por videochamada se necessário.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CTA / CONTATO ========== -->
+    <section class="section cta-section" id="contato">
+        <div class="section-container">
+            <div class="cta-container">
+                <span class="section-tag" style="background: rgba(59,130,246,0.2); color: #93c5fd;">Fale Conosco</span>
+                <h2>Pronto para conectar sua empresa?</h2>
+                <p>Entre em contato com nossos especialistas e receba uma proposta personalizada para sua necessidade.
+                    Atendimento rápido via WhatsApp.</p>
+                <div class="cta-actions">
+                    <a href="https://wa.me/5569999999999?text=Ol%C3%A1!%20Tenho%20interesse%20na%20loca%C3%A7%C3%A3o%20de%20Starlink%20para%20minha%20empresa."
+                        class="btn btn-whatsapp" target="_blank" rel="noopener">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                        </svg>
+                        Falar com Especialista
+                    </a>
+                    <a href="mailto:contato@starlinklocacao.com.br" class="btn btn-outline">
+                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        Enviar E-mail
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>STARLINK LOCAÇÃO</h3>
+                    <p>Conecte sua empresa onde estiver com a internet via satélite Starlink. Equipamento, dados
+                        ilimitados e suporte em uma única mensalidade.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="#como-funciona">Como Funciona</a></li>
+                        <li><a href="#vantagens">Vantagens</a></li>
+                        <li><a href="#planos">Planos</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Planos</h4>
+                    <ul>
+                        <li><a href="#planos">Fixo Ilimitado</a></li>
+                        <li><a href="#planos">Móvel Ilimitado</a></li>
+                        <li><a href="#planos">Fixo Limitado</a></li>
+                        <li><a href="#planos">Móvel Limitado</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><a href="https://wa.me/5569999999999" target="_blank" rel="noopener">WhatsApp</a></li>
+                        <li><a href="mailto:contato@starlinklocacao.com.br">E-mail</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="footer-bottom">
+                <span>&copy; 2026 Starlink Locação. Todos os direitos reservados.</span>
+                <span>Desenvolvido por Virgilio Monteiro</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== WHATSAPP FLOAT ========== -->
+    <a href="https://wa.me/5569999999999?text=Ol%C3%A1!%20Tenho%20interesse%20na%20loca%C3%A7%C3%A3o%20de%20Starlink."
+        class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat no WhatsApp">
+        <svg viewBox="0 0 24 24">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+    </a>
+
+    <script>
+        // ===== Estrelas animadas no hero =====
+        const starsContainer = document.getElementById('heroStars');
+        for (let i = 0; i < 80; i++) {
+            const star = document.createElement('span');
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.setProperty('--dur', (2 + Math.random() * 4) + 's');
+            star.style.setProperty('--opacity', (0.3 + Math.random() * 0.7));
+            star.style.animationDelay = Math.random() * 4 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // ===== Navbar scroll effect =====
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // ===== Mobile menu =====
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('active'));
+        });
+
+        // ===== FAQ accordion =====
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const wasActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!wasActive) item.classList.add('active');
+            });
+        });
+
+        // ===== Smooth scroll =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ===== Scroll reveal animation =====
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.how-card, .plan-card, .faq-item, .adv-mini-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // ===== PLANOS E SIMULADOR =====
+        const PLAN_NAMES = {
+            '70': 'Fixo Ilimitado',
+            '85': 'Móvel Ilimitado',
+            '50': 'Fixo Limitado',
+            '60': 'Móvel Limitado'
+        };
+
+        function getDiscount(days) {
+            if (days >= 30) return { pct: 0.30, label: 'Mensal (30%)' };
+            if (days >= 14) return { pct: 0.20, label: 'Quinzenal (20%)' };
+            if (days >= 7) return { pct: 0.10, label: 'Semanal (10%)' };
+            return { pct: 0, label: 'Sem desconto' };
+        }
+
+        function formatCurrency(value) {
+            return 'R$ ' + value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function selectPlan(card) {
+            // Remove seleção de todos
+            document.querySelectorAll('.plan-card').forEach(c => {
+                c.classList.remove('selected-plan');
+                c.classList.remove('featured');
+            });
+            // Marca o selecionado
+            card.classList.add('selected-plan');
+
+            // Sincroniza o select do simulador
+            const price = card.dataset.price;
+            const simPlan = document.getElementById('simPlan');
+            simPlan.value = price;
+
+            // Recalcula
+            calcSimulator();
+
+            // Scroll suave até o simulador
+            setTimeout(() => {
+                document.getElementById('simulador').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 200);
+        }
+
+        function updateDiscountBar(days) {
+            const tiers = ['tier-none', 'tier-weekly', 'tier-biweekly', 'tier-monthly'];
+            tiers.forEach(t => document.getElementById(t).classList.remove('active'));
+
+            if (days >= 30) document.getElementById('tier-monthly').classList.add('active');
+            else if (days >= 14) document.getElementById('tier-biweekly').classList.add('active');
+            else if (days >= 7) document.getElementById('tier-weekly').classList.add('active');
+            else document.getElementById('tier-none').classList.add('active');
+        }
+
+        function calcSimulator() {
+            const pricePerDay = parseFloat(document.getElementById('simPlan').value) || 0;
+            const days = parseInt(document.getElementById('simDays').value) || 0;
+
+            const totalEl = document.getElementById('simTotal');
+            const detailEl = document.getElementById('simDetail');
+            const savingsEl = document.getElementById('simSavings');
+
+            if (!pricePerDay || !days || days < 1) {
+                totalEl.textContent = 'R$ 0,00';
+                detailEl.textContent = 'Selecione um plano e informe as diárias';
+                savingsEl.classList.add('hidden');
+                updateDiscountBar(0);
+                return;
+            }
+
+            const discount = getDiscount(days);
+            const totalSemDesconto = pricePerDay * days;
+            const descontoValor = totalSemDesconto * discount.pct;
+            const totalComDesconto = totalSemDesconto - descontoValor;
+            const dailyWithDiscount = pricePerDay * (1 - discount.pct);
+
+            updateDiscountBar(days);
+
+            totalEl.textContent = formatCurrency(totalComDesconto);
+
+            const planName = PLAN_NAMES[String(pricePerDay)] || 'Plano';
+            if (discount.pct > 0) {
+                detailEl.textContent = `${planName} • ${days} diária${days > 1 ? 's' : ''} × ${formatCurrency(dailyWithDiscount)}/dia (${discount.label})`;
+                savingsEl.textContent = `🎉 Economia de ${formatCurrency(descontoValor)}`;
+                savingsEl.classList.remove('hidden');
+            } else {
+                detailEl.textContent = `${planName} • ${days} diária${days > 1 ? 's' : ''} × ${formatCurrency(pricePerDay)}/dia`;
+                savingsEl.classList.add('hidden');
+            }
+
+            // Sincroniza card selecionado com o select
+            document.querySelectorAll('.plan-card').forEach(c => {
+                c.classList.remove('selected-plan');
+                c.classList.remove('featured');
+                if (c.dataset.price === String(pricePerDay)) {
+                    c.classList.add('selected-plan');
+                }
+            });
+        }
+
+        function sendWhatsApp(e) {
+            e.preventDefault();
+            const pricePerDay = parseFloat(document.getElementById('simPlan').value) || 0;
+            const days = parseInt(document.getElementById('simDays').value) || 0;
+
+            if (!pricePerDay || !days) {
+                alert('Selecione um plano e informe a quantidade de diárias.');
+                return;
+            }
+
+            const planName = PLAN_NAMES[String(pricePerDay)] || 'Plano';
+            const discount = getDiscount(days);
+            const total = pricePerDay * days * (1 - discount.pct);
+
+            let msg = `Olá! Tenho interesse na locação de Starlink.\n\n`;
+            msg += `📋 Plano: ${planName}\n`;
+            msg += `📅 Diárias: ${days}\n`;
+            if (discount.pct > 0) {
+                msg += `🏷️ Desconto: ${discount.label}\n`;
+            }
+            msg += `💰 Total estimado: ${formatCurrency(total)}`;
+
+            const encoded = encodeURIComponent(msg);
+            window.open(`https://wa.me/5569999999999?text=${encoded}`, '_blank');
+        }
+
+        // Inicializar o simulador
+        calcSimulator();
+    </script>
+
+</body>
+
+</html>
