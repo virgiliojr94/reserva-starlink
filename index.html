@@ -1016,21 +1016,25 @@
 
         /* ========== CTA / CONTATO ========== */
         .cta-section {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a0a 100%);
+            background: #111111;
             text-align: center;
             position: relative;
             overflow: hidden;
+            border-top: 1px solid rgba(212, 160, 23, 0.2);
+            border-bottom: 1px solid rgba(212, 160, 23, 0.2);
         }
 
         .cta-section::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at center, rgba(212, 160, 23, 0.15), transparent 70%);
+            background: radial-gradient(ellipse at center, rgba(212, 160, 23, 0.08), transparent 70%);
+            pointer-events: none;
         }
 
         .cta-container {
             position: relative;
+            z-index: 2;
             max-width: 700px;
             margin: 0 auto;
         }
@@ -1043,9 +1047,15 @@
             margin-bottom: 16px;
         }
 
+        .cta-section .section-tag {
+            background: rgba(212, 160, 23, 0.15);
+            color: #d4a017;
+            border: 1px solid rgba(212, 160, 23, 0.3);
+        }
+
         .cta-section p {
             font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.7);
             margin-bottom: 40px;
             line-height: 1.7;
         }
@@ -1930,7 +1940,7 @@
     <section class="section cta-section" id="contato">
         <div class="section-container">
             <div class="cta-container">
-                <span class="section-tag" style="background: rgba(212,160,23,0.2); color: #f0d060;">Fale Conosco</span>
+                <span class="section-tag">Fale Conosco</span>
                 <h2>Pronto para conectar sua empresa?</h2>
                 <p>Entre em contato com nossos especialistas e receba uma proposta personalizada para sua necessidade.
                     Atendimento rápido via WhatsApp.</p>
