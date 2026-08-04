@@ -12,6 +12,8 @@
   --display: "Barlow Condensed", "Arial Narrow", sans-serif;
   --body: "Source Sans 3", Arial, sans-serif;
   --shell: min(1240px, calc(100vw - 48px));
+  --ease-out: cubic-bezier(.23, 1, .32, 1);
+  --ease-in-out: cubic-bezier(.77, 0, .175, 1);
 }
 
 *,
@@ -111,9 +113,22 @@ button {
 
 .site-header.is-scrolled,
 .site-header.menu-open {
-  background: rgb(9 12 11 / 96%);
+  background: rgb(9 12 11 / 88%);
   border-bottom-color: var(--line-dark);
   box-shadow: 0 10px 32px rgb(0 0 0 / 18%);
+  backdrop-filter: blur(16px) saturate(140%);
+}
+
+.scroll-progress {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
 }
 
 .nav {
@@ -237,6 +252,55 @@ button {
 .is-loaded .hero-media img {
   transform: scale(1);
 }
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes nav-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.js .hero-copy > *,
+.js .hero-proof > div {
+  animation: hero-enter 760ms var(--ease-out) both;
+}
+
+.js .hero-copy > :nth-child(1) { animation-delay: 90ms; }
+.js .hero-copy > :nth-child(2) { animation-delay: 165ms; }
+.js .hero-copy > :nth-child(3) { animation-delay: 240ms; }
+.js .hero-copy > :nth-child(4) { animation-delay: 315ms; }
+.js .hero-proof > :nth-child(1) { animation-delay: 380ms; }
+.js .hero-proof > :nth-child(2) { animation-delay: 440ms; }
+.js .hero-proof > :nth-child(3) { animation-delay: 500ms; }
+
+.js .site-header .brand,
+.js .site-header .nav-links > a,
+.js .site-header .nav-toggle {
+  animation: nav-enter 540ms var(--ease-out) both;
+}
+
+.js .site-header .nav-links > :nth-child(1) { animation-delay: 45ms; }
+.js .site-header .nav-links > :nth-child(2) { animation-delay: 80ms; }
+.js .site-header .nav-links > :nth-child(3) { animation-delay: 115ms; }
+.js .site-header .nav-links > :nth-child(4) { animation-delay: 150ms; }
+.js .site-header .nav-links > :nth-child(5) { animation-delay: 185ms; }
 
 .hero-overlay {
   z-index: -1;
@@ -507,6 +571,11 @@ button {
   font-size: clamp(3rem, 5vw, 4.6rem);
   font-weight: 700;
   line-height: .9;
+  transition: transform 260ms var(--ease-out);
+}
+
+.plan-card.is-selected .plan-price {
+  transform: translateX(8px);
 }
 
 .plan-price > span,
@@ -943,6 +1012,19 @@ button {
   color: var(--muted);
 }
 
+.faq-list details[open] p {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 220ms var(--ease-out), transform 260ms var(--ease-out);
+}
+
+@starting-style {
+  .faq-list details[open] p {
+    opacity: 0;
+    transform: translateY(-7px);
+  }
+}
+
 .final-cta {
   position: relative;
   min-height: min(820px, 88svh);
@@ -1044,7 +1126,12 @@ button {
   background: var(--green);
   color: #06140b;
   box-shadow: 0 14px 34px rgb(0 0 0 / 25%);
-  transition: background-color 180ms ease, transform 140ms ease;
+  transition: background-color 180ms ease, box-shadow 220ms ease, transform 140ms var(--ease-out);
+}
+
+.whatsapp-float svg,
+.button-whatsapp svg {
+  transition: transform 220ms var(--ease-out);
 }
 
 .whatsapp-float svg {
@@ -1053,15 +1140,31 @@ button {
   fill: currentColor;
 }
 
-.js [data-reveal] {
+.motion-ready [data-motion] {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translate3d(0, 24px, 0);
 }
 
-.js [data-reveal].is-visible {
+.motion-ready [data-motion="left"] {
+  transform: translate3d(-28px, 0, 0);
+}
+
+.motion-ready [data-motion="right"] {
+  transform: translate3d(-24px, 0, 0);
+}
+
+.motion-ready [data-motion="scale"] {
+  transform: translate3d(0, 20px, 0) scale(.985);
+}
+
+.motion-ready [data-motion].is-visible {
   opacity: 1;
-  transform: translateY(0);
-  transition: opacity 450ms ease, transform 550ms cubic-bezier(.16, 1, .3, 1);
+  transform: translate3d(0, 0, 0) scale(1);
+  transition: opacity 620ms var(--ease-out) var(--motion-delay, 0ms), transform 720ms var(--ease-out) var(--motion-delay, 0ms);
+}
+
+.motion-ready .plan-card[data-motion].is-visible {
+  transition: opacity 620ms var(--ease-out) var(--motion-delay, 0ms), transform 720ms var(--ease-out) var(--motion-delay, 0ms), background-color 220ms ease, color 220ms ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1079,6 +1182,19 @@ button {
   .button-whatsapp:hover,
   .whatsapp-float:hover {
     background: #4ade80;
+  }
+
+  .button-whatsapp:hover svg {
+    transform: rotate(-4deg) scale(1.06);
+  }
+
+  .whatsapp-float:hover {
+    box-shadow: 0 18px 42px rgb(0 0 0 / 30%);
+    transform: scale(1.06);
+  }
+
+  .whatsapp-float:hover svg {
+    transform: rotate(-7deg);
   }
 
   .text-link:hover span {
@@ -1179,14 +1295,15 @@ button {
     background: var(--ink);
     visibility: hidden;
     opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
+    transform: translateY(-10px) scale(.985);
+    transform-origin: top right;
+    transition: opacity 220ms var(--ease-out), transform 240ms var(--ease-out), visibility 220ms;
   }
 
   .nav-links.is-open {
     visibility: visible;
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 
   .nav-links > a {
@@ -1482,8 +1599,12 @@ button {
   }
 
   .hero-media img,
-  .js [data-reveal] {
+  .motion-ready [data-motion] {
     opacity: 1;
     transform: none;
+  }
+
+  .scroll-progress {
+    will-change: auto;
   }
 }

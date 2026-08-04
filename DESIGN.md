@@ -165,6 +165,10 @@ O cabeçalho sobrepõe o hero em transparência e torna-se carbono após rolagem
 
 Métricas comerciais usam termos pequenos, numerais condensados e divisórias verticais. No mobile, cada linha emparelha termo e valor para leitura rápida.
 
+### Motion Grammar
+
+O hero entra em sequência na primeira visita. Seções revelam conteúdo uma única vez com opacidade, deslocamento curto e stagger de 45–90ms; o simulador usa feedback de 240ms para mudanças de total. Movimento contínuo fica restrito à barra de progresso da página. Toda translação é removida em `prefers-reduced-motion`.
+
 ## Do's and Don'ts
 
 ### Do:

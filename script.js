@@ -3,6 +3,7 @@
 const siteHeader = document.querySelector("#site-header");
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector("#nav-links");
+const scrollProgress = document.querySelector("#scroll-progress");
 const mobileQuery = window.matchMedia("(max-width: 820px)");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -39,6 +40,11 @@ mobileQuery.addEventListener("change", (event) => {
 let scrollTicking = false;
 const updateHeader = () => {
   siteHeader?.classList.toggle("is-scrolled", window.scrollY > 24);
+  if (scrollProgress) {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? Math.min(window.scrollY / scrollable, 1) : 0;
+    scrollProgress.style.transform = `scaleX(${progress})`;
+  }
   scrollTicking = false;
 };
 
@@ -50,7 +56,9 @@ window.addEventListener("scroll", () => {
 }, { passive: true });
 
 updateHeader();
-window.addEventListener("load", () => document.body.classList.add("is-loaded"), { once: true });
+const markLoaded = () => window.requestAnimationFrame(() => document.body.classList.add("is-loaded"));
+if (document.readyState === "complete") markLoaded();
+else window.addEventListener("load", markLoaded, { once: true });
 
 const year = document.querySelector("#current-year");
 if (year) year.textContent = String(new Date().getFullYear());
@@ -90,10 +98,31 @@ if (planSelect) {
 }
 
 const getDiscount = (days) => {
-  if (days >= 30) return { rate: .3, tier: 30 };
-  if (days >= 14) return { rate: .2, tier: 14 };
-  if (days >= 7) return { rate: .1, tier: 7 };
-  return { rate: 0, tier: 0 };
+  if (days >= 30) return { rate: .3, tier: 30, label: "Mensal (30%)" };
+  if (days >= 14) return { rate: .2, tier: 14, label: "Quinzenal (20%)" };
+  if (days >= 7) return { rate: .1, tier: 7, label: "Semanal (10%)" };
+  return { rate: 0, tier: 0, label: "Sem desconto" };
+};
+
+const formatMessageCurrency = (value) => `R$ ${value.toLocaleString("pt-BR", {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+})}`;
+
+const animateResult = () => {
+  if (reducedMotion.matches || !("animate" in Element.prototype)) return;
+  [totalOutput, detailOutput, savingsOutput].forEach((element, index) => {
+    if (!element || element.hidden) return;
+    element.getAnimations().forEach((animation) => animation.cancel());
+    element.animate([
+      { opacity: .45, transform: "translateY(6px)", filter: "blur(2px)" },
+      { opacity: 1, transform: "translateY(0)", filter: "blur(0)" }
+    ], {
+      duration: 240,
+      delay: index * 35,
+      easing: "cubic-bezier(.23, 1, .32, 1)"
+    });
+  });
 };
 
 const setSimulatorEnabled = (enabled) => {
@@ -149,7 +178,7 @@ const calculate = () => {
   }
 
   showError();
-  const { rate, tier } = getDiscount(days);
+  const { rate, tier, label } = getDiscount(days);
   const subtotal = plan.price * days;
   const discountValue = subtotal * rate;
   const total = subtotal - discountValue;
@@ -159,13 +188,18 @@ const calculate = () => {
   detailOutput.textContent = `${days} ${dailyWord} × ${currency.format(plan.price)}${rate ? ` · ${Math.round(rate * 100)}% de desconto` : ""}`;
   savingsOutput.hidden = rate === 0;
   savingsOutput.textContent = rate ? `Você economiza ${currency.format(discountValue)}` : "";
+  animateResult();
 
   discountTiers.forEach((item) => {
     if (Number(item.dataset.discountTier) === tier) item.setAttribute("aria-current", "true");
     else item.removeAttribute("aria-current");
   });
 
-  const message = `Olá! Quero verificar a disponibilidade do plano ${plan.name} para ${days} ${dailyWord}. Total estimado: ${currency.format(total)}.`;
+  let message = "Olá! Tenho interesse na locação de Starlink.\n\n";
+  message += `📋 Plano: ${plan.name}\n`;
+  message += `📅 Diárias: ${days}\n`;
+  if (rate > 0) message += `🏷️ Desconto: ${label}\n`;
+  message += `💰 Total estimado: ${formatMessageCurrency(total)}`;
   whatsappButton.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
   whatsappButton.target = "_blank";
   whatsappButton.rel = "noopener";
@@ -196,7 +230,26 @@ whatsappButton?.addEventListener("click", (event) => {
 
 calculate();
 
-const revealTargets = [...document.querySelectorAll("[data-reveal]")];
+const registerMotionGroup = (selector, variant = "up", delayStep = 55) => {
+  document.querySelectorAll(selector).forEach((target, index) => {
+    target.dataset.motion = variant;
+    target.style.setProperty("--motion-delay", `${Math.min(index, 5) * delayStep}ms`);
+  });
+};
+
+registerMotionGroup(".section-heading > *");
+registerMotionGroup(".plan-card", "scale", 65);
+registerMotionGroup(".simulator > *", "up", 90);
+registerMotionGroup(".process-list > li", "right", 70);
+registerMotionGroup(".experience-media", "left");
+registerMotionGroup(".experience-copy > *", "up", 60);
+registerMotionGroup(".photo-grid figure", "scale", 55);
+registerMotionGroup(".faq-list details", "up", 45);
+registerMotionGroup(".final-cta-content > *", "up", 70);
+registerMotionGroup(".footer-main > *", "up", 55);
+registerMotionGroup(".commercial-note");
+
+const revealTargets = [...document.querySelectorAll("[data-motion]")];
 if (reducedMotion.matches || !("IntersectionObserver" in window)) {
   revealTargets.forEach((target) => target.classList.add("is-visible"));
 } else {
@@ -206,10 +259,10 @@ if (reducedMotion.matches || !("IntersectionObserver" in window)) {
       entry.target.classList.add("is-visible");
       observer.unobserve(entry.target);
     });
-  }, { threshold: .12, rootMargin: "0px 0px -8%" });
+  }, { threshold: .14, rootMargin: "0px 0px -7%" });
   revealTargets.forEach((target) => revealObserver.observe(target));
 }
-
+document.documentElement.classList.add("motion-ready");
 const sectionLinks = [...document.querySelectorAll('.nav-links a[href^="#"]')];
 const sections = sectionLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
