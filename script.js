@@ -200,7 +200,7 @@ const calculate = () => {
   message += `📅 Diárias: ${days}\n`;
   if (rate > 0) message += `🏷️ Desconto: ${label}\n`;
   message += `💰 Total estimado: ${formatMessageCurrency(total)}`;
-  whatsappButton.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  whatsappButton.href = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
   whatsappButton.target = "_blank";
   whatsappButton.rel = "noopener";
   setSimulatorEnabled(true);
