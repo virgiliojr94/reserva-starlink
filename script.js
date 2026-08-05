@@ -60,6 +60,67 @@ const markLoaded = () => window.requestAnimationFrame(() => document.body.classL
 if (document.readyState === "complete") markLoaded();
 else window.addEventListener("load", markLoaded, { once: true });
 
+const hero = document.querySelector("#inicio");
+const heroVideo = document.querySelector("#hero-video");
+const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+const dataConstrained = Boolean(connection?.saveData || ["slow-2g", "2g"].includes(connection?.effectiveType));
+
+if (hero && heroVideo && !reducedMotion.matches && !dataConstrained) {
+  let heroVisible = true;
+  let sourcesReady = false;
+  let loadScheduled = false;
+
+  const playHeroVideo = () => {
+    if (!heroVisible || document.hidden) return;
+    if (!sourcesReady) {
+      heroVideo.querySelectorAll("source[data-src]").forEach((source) => {
+        source.src = source.dataset.src;
+        source.removeAttribute("data-src");
+      });
+      heroVideo.load();
+      sourcesReady = true;
+    }
+    heroVideo.play().catch(() => {});
+  };
+
+  const scheduleHeroVideo = () => {
+    if (loadScheduled || sourcesReady) return;
+    loadScheduled = true;
+    const queuePlayback = () => {
+      const run = () => {
+        loadScheduled = false;
+        playHeroVideo();
+      };
+      if ("requestIdleCallback" in window) window.requestIdleCallback(run, { timeout: 1800 });
+      else window.setTimeout(run, 600);
+    };
+    if (document.readyState === "complete") queuePlayback();
+    else window.addEventListener("load", queuePlayback, { once: true });
+  };
+
+  heroVideo.addEventListener("loadeddata", () => heroVideo.classList.add("is-ready"), { once: true });
+
+  if ("IntersectionObserver" in window) {
+    const heroVideoObserver = new IntersectionObserver(([entry]) => {
+      heroVisible = entry.isIntersecting;
+      if (heroVisible) {
+        if (sourcesReady) heroVideo.play().catch(() => {});
+        else scheduleHeroVideo();
+      } else {
+        heroVideo.pause();
+      }
+    }, { threshold: .08 });
+    heroVideoObserver.observe(hero);
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) heroVideo.pause();
+    else if (heroVisible && sourcesReady) heroVideo.play().catch(() => {});
+  });
+
+  scheduleHeroVideo();
+}
+
 const year = document.querySelector("#current-year");
 if (year) year.textContent = String(new Date().getFullYear());
 

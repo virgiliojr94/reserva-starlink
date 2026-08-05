@@ -239,14 +239,38 @@ button {
   inset: 0;
 }
 
-.hero-media img {
+.hero-poster,
+.hero-media img,
+.hero-video {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+}
+
+.hero-poster {
+  display: block;
+}
+
+.hero-media img,
+.hero-video {
   object-fit: cover;
-  object-position: 50% 58%;
+  object-position: center;
   filter: saturate(.72) contrast(1.07) brightness(.74);
+}
+
+.hero-media img {
   transform: scale(1.025);
   transition: transform 1100ms cubic-bezier(.16, 1, .3, 1);
+}
+
+.hero-video {
+  opacity: 0;
+  transition: opacity 700ms var(--ease-out);
+}
+
+.hero-video.is-ready {
+  opacity: 1;
 }
 
 .is-loaded .hero-media img {
@@ -1325,7 +1349,8 @@ button {
     text-transform: none;
   }
 
-  .hero-media img {
+  .hero-media img,
+  .hero-video {
     object-position: 51% 55%;
   }
 
@@ -1602,6 +1627,10 @@ button {
   .motion-ready [data-motion] {
     opacity: 1;
     transform: none;
+  }
+
+  .hero-video {
+    display: none;
   }
 
   .scroll-progress {

@@ -15,6 +15,8 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23090c0b'/%3E%3Cpath d='M13 42c9-15 29-21 42-9' fill='none' stroke='%23fff' stroke-width='5' stroke-linecap='round'/%3E%3Ccircle cx='17' cy='43' r='5' fill='%2325d366'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="media/hero-desktop-poster.webp" fetchpriority="high" media="(min-width: 701px)">
+  <link rel="preload" as="image" href="media/hero-mobile-poster.webp" fetchpriority="high" media="(max-width: 700px)">
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js');</script>
   <link rel="stylesheet" href="styles.css">
@@ -58,7 +60,16 @@
   <main id="conteudo">
     <section class="hero" id="inicio" aria-labelledby="hero-title">
       <div class="hero-media" aria-hidden="true">
-        <img src="gallery/starlink-01.webp" width="739" height="1600" alt="" fetchpriority="high" decoding="sync">
+        <picture class="hero-poster">
+          <source media="(max-width: 700px)" srcset="media/hero-mobile-poster.webp">
+          <img src="media/hero-desktop-poster.webp" width="1080" height="608" alt="" fetchpriority="high" decoding="async">
+        </picture>
+        <video class="hero-video" id="hero-video" muted loop playsinline preload="none" tabindex="-1">
+          <source data-src="media/hero-mobile.webm" type="video/webm" media="(max-width: 700px)">
+          <source data-src="media/hero-mobile.mp4" type="video/mp4" media="(max-width: 700px)">
+          <source data-src="media/hero-desktop.webm" type="video/webm">
+          <source data-src="media/hero-desktop.mp4" type="video/mp4">
+        </video>
       </div>
       <div class="hero-overlay"></div>
       <div class="hero-content shell">
