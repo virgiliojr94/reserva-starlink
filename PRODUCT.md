@@ -12,7 +12,7 @@ Landing page estática em HTML, CSS e JavaScript puro, publicada pelo GitHub Pag
 
 ## Users
 
-O público principal é formado por empresas, fazendas, obras e organizadores de eventos que precisam de internet temporária ou em locais remotos. O serviço parte de Boa Vista/RR e atende necessidades em território nacional.
+O público principal é formado por empresas, fazendas, obras e organizadores de eventos que precisam de internet temporária ou em locais remotos. O serviço parte de Boa Vista/RR e atende necessidades em território Regional (toda Roraima).
 
 ## Product Purpose
 
@@ -33,7 +33,7 @@ O serviço é avaliado e contratado pela landing page, com simulação de valor 
 - Planos limitados incluem franquia de 100 GB e cobrança informada de R$ 10 por GB excedente.
 - O produto inclui equipamento, plano de dados, configuração remota e suporte técnico.
 - O contato e o fechamento comercial acontecem pelo WhatsApp; a página não processa pagamentos nem reservas diretamente.
-- O serviço comunica entrega nacional, suporte 24/7 e referências de desempenho de até 300 Mbps de download, 30 Mbps de upload, 20 ms de latência e 99,9% de disponibilidade.
+- O serviço comunica entrega Regional (toda Roraima), suporte 24/7 e referências de desempenho de até 300 Mbps de download, 30 Mbps de upload, 20 ms de latência e 99,9% de disponibilidade.
 - A disponibilidade de ativação está sujeita a confirmação.
 
 ## Brand Commitments
